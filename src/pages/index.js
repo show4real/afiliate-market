@@ -6,6 +6,7 @@ import { OverviewBudget } from "src/sections/overview/overview-budget";
 
 import { OverviewTotalCustomers } from "src/sections/overview/overview-total-customers";
 import { getDashboard } from "src/services/referrerService";
+import { OverviewSales } from "src/sections/overview/overview-sales";
 
 const now = new Date();
 
@@ -13,6 +14,7 @@ const Page = () => {
   const [earnings, setEarnings] = useState(0);
   const [transactions, setTransactions] = useState(0);
   const [loading, setLoading] = useState(false);
+  const [status, setStatus] = useState("Pending");
 
   useEffect(() => {
     fetchDashboard();
@@ -24,6 +26,7 @@ const Page = () => {
       .then((res) => {
         setTransactions(res.total_transactions);
         setEarnings(res.total_earnings);
+        setStatus(res.status);
         setLoading(false);
       })
       .catch((error) => {
@@ -60,6 +63,9 @@ const Page = () => {
                 sx={{ height: "100%" }}
                 value={`${earnings}`}
               />
+            </Grid>
+            <Grid xs={12} sm={6} lg={3}>
+              <OverviewSales difference={12} positive sx={{ height: "100%" }} value={`${status}`} />
             </Grid>
           </Grid>
         </Container>
