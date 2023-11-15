@@ -19,7 +19,7 @@ export const OverviewSales = (props) => {
             </Typography>
             <Typography variant="h4">{value}</Typography>
           </Stack>
-          {value == "pending" ? (
+          {value == "Pending" ? (
             <Avatar
               sx={{
                 backgroundColor: "error.main",

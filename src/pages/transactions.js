@@ -189,26 +189,45 @@ const Page = () => {
                       </TableRow>
                     </TableHead>
                     <TableBody>
-                      {transactions.map((transaction) => {
-                        // const createdAt = format(transaction.created_at, "dd/MM/yyyy");
-                        const createdAt = moment(transaction.created_at).format(
-                          "MMMM Do YYYY, h:mm:ss a"
-                        );
-                        return (
-                          <TableRow hover key={transaction.id}>
-                            {/* <TableCell>{transaction.name}</TableCell> */}
-                            <TableCell> &#8358;{formatNumber(transaction.product_cost)}</TableCell>
-                            <TableCell>{transaction.percentage}%</TableCell>
-                            <TableCell> &#8358;{formatNumber(transaction.paid)}</TableCell>
-                            <TableCell>
-                              {transaction.status == 1 ? "Approved" : "Pending"}
-                            </TableCell>
-                            <TableCell>{createdAt}</TableCell>
-                          </TableRow>
-                        );
-                      })}
+                      {transactions.length > 0 &&
+                        transactions.map((transaction) => {
+                          // const createdAt = format(transaction.created_at, "dd/MM/yyyy");
+                          const createdAt = moment(transaction.created_at).format(
+                            "MMMM Do YYYY, h:mm:ss a"
+                          );
+                          return (
+                            <TableRow hover key={transaction.id}>
+                              {/* <TableCell>{transaction.name}</TableCell> */}
+                              <TableCell>
+                                {" "}
+                                &#8358;{formatNumber(transaction.product_cost)}
+                              </TableCell>
+                              <TableCell>{transaction.percentage}%</TableCell>
+                              <TableCell> &#8358;{formatNumber(transaction.paid)}</TableCell>
+                              <TableCell>
+                                {transaction.status == 1 ? "Approved" : "Pending"}
+                              </TableCell>
+                              <TableCell>{createdAt}</TableCell>
+                            </TableRow>
+                          );
+                        })}
                     </TableBody>
                   </Table>
+                  {transactions.length == 0 && (
+                    <div className="text-gray-200 font-md p-16 justify-center">
+                      <i className="fa fa-ban" style={{ marginRight: 5 }} />
+                      No Transactions Found
+                    </div>
+                  )}
+                  {transactions.length > 0 && (
+                    <Pagination
+                      total={total}
+                      showTotal={(total) => `Total ${total} transactions`}
+                      onChange={onPageChange}
+                      pageSize={rows}
+                      current={page}
+                    />
+                  )}
                 </Box>
               </Scrollbar>
             </Card>
