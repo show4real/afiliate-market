@@ -15,6 +15,7 @@ import {
 import { notification, Input, Button } from "antd";
 import { CopyOutlined } from "@ant-design/icons";
 import { getReferrer } from "src/services/referrerService";
+import SpinDiv from "src/components/SpinDiv";
 
 export const AccountProfileDetails = () => {
   const [referrer, setReferrer] = useState("");
@@ -174,6 +175,7 @@ export const AccountProfileDetails = () => {
 
   return (
     <>
+      {loading && <SpinDiv />}
       {!loading && referrer && (
         <form autoComplete="off">
           <Card>
@@ -184,10 +186,14 @@ export const AccountProfileDetails = () => {
                   <Grid xs={12} md={6}>
                     <Input
                       placeholder="Enter a value"
-                      value={referral_code}
+                      value={referrer.status == 1 ? referral_code : "Pending approval"}
                       onChange={(e) => setReferralCode(e.target.value)}
                       disabled
-                      suffix={<Button icon={<CopyOutlined />} onClick={handleCopy} />}
+                      suffix={
+                        referrer.status == 1 && (
+                          <Button icon={<CopyOutlined />} onClick={handleCopy} />
+                        )
+                      }
                     />
                   </Grid>
                   <Grid xs={12} md={6}>

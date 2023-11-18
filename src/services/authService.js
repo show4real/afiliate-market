@@ -2,6 +2,7 @@ import settings from "./settings";
 
 export const authService = {
   login,
+  register,
   handleResponse,
 };
 
@@ -22,14 +23,13 @@ export function login({ email, password }) {
     });
 }
 
-export function register({ firstname, lastname, email, password }) {
-  console.log(email);
+export function register({ name, email, phone, referrer, password }) {
   const requestOptions = {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ firstname, lastname, email, password }),
+    headers: { "Content-Type": "application/json", Accept: "application/json" },
+    body: JSON.stringify({ name, email, phone, referrer, password }),
   };
-  return fetch(`${settings.API_URL}`, requestOptions).then(handleResponse);
+  return fetch(`${settings.API_URL}signup`, requestOptions).then(handleResponse);
 }
 
 export function handleResponse(response) {

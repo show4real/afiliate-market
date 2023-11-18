@@ -18,6 +18,7 @@ import {
 } from "@mui/material";
 import { useAuth } from "src/hooks/use-auth";
 import { Layout as AuthLayout } from "src/layouts/auth/layout";
+import WelcomeTerm from "src/components/WelcomeTerms";
 
 const Page = () => {
   const router = useRouter();

@@ -5,19 +5,22 @@ import { Layout as DashboardLayout } from "src/layouts/dashboard/layout";
 import { OverviewBudget } from "src/sections/overview/overview-budget";
 
 import { OverviewTotalCustomers } from "src/sections/overview/overview-total-customers";
-import { getDashboard } from "src/services/referrerService";
+import { getDashboard, getReferrer } from "src/services/referrerService";
 import { OverviewSales } from "src/sections/overview/overview-sales";
+import Coupon from "src/components/Coupon";
 
 const now = new Date();
 
 const Page = () => {
   const [earnings, setEarnings] = useState(0);
   const [transactions, setTransactions] = useState(0);
+  const [referrer, setReferrer] = useState("");
   const [loading, setLoading] = useState(false);
   const [status, setStatus] = useState("Pending");
 
   useEffect(() => {
     fetchDashboard();
+    fetchReferrer();
   }, []);
 
   const fetchDashboard = () => {
@@ -31,6 +34,18 @@ const Page = () => {
       })
       .catch((error) => {
         setLoading(false);
+      });
+  };
+
+  const fetchReferrer = () => {
+    setLoading(true);
+    getReferrer()
+      .then((res) => {
+        setReferrer(res.referrer);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.error(err);
       });
   };
 
@@ -67,6 +82,12 @@ const Page = () => {
             <Grid xs={12} sm={6} lg={3}>
               <OverviewSales difference={12} positive sx={{ height: "100%" }} value={`${status}`} />
             </Grid>
+            <Grid xs={12} sm={6} lg={3}></Grid>
+            {referrer && referrer.status == 1 && (
+              <Grid xs={12} sm={6} lg={3}>
+                <Coupon referrer={referrer} />
+              </Grid>
+            )}
           </Grid>
         </Container>
       </Box>

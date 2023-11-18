@@ -1,32 +1,50 @@
 import Head from "next/head";
 import NextLink from "next/link";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { Box, Button, Link, Stack, TextField, Typography } from "@mui/material";
 import { useAuth } from "src/hooks/use-auth";
+import { notification, Spin } from "antd";
 import { Layout as AuthLayout } from "src/layouts/auth/layout";
+import WelcomeTerm from "src/components/WelcomeTerms";
 
 const Page = () => {
   const router = useRouter();
   const auth = useAuth();
+  const [saving, setSaving] = useState(false);
   const formik = useFormik({
     initialValues: {
       email: "",
       name: "",
+      phone: "",
       password: "",
       submit: null,
     },
     validationSchema: Yup.object({
       email: Yup.string().email("Must be a valid email").max(255).required("Email is required"),
       name: Yup.string().max(255).required("Name is required"),
+      phone: Yup.number().required("Phone is required"),
       password: Yup.string().max(255).required("Password is required"),
     }),
     onSubmit: async (values, helpers) => {
+      setSaving(true);
+      let referrer = 1;
       try {
-        await auth.signUp(values.email, values.name, values.password);
-        router.push("/");
+        await auth.signUp(values.name, values.email, values.phone, referrer, values.password);
+
+        notification.success({
+          message: "Registration Successful",
+          description:
+            "You have suucessfully registered. A Verification link has been sent to your email, Please confirm!",
+        });
+
+        setTimeout(() => {
+          router.push("/auth/login");
+        }, 2000);
       } catch (err) {
+        setSaving(false);
         helpers.setStatus({ success: false });
         helpers.setErrors({ submit: err.message });
         helpers.setSubmitting(false);
@@ -39,6 +57,7 @@ const Page = () => {
       <Head>
         <title>Register | Hayzee Computer Resources</title>
       </Head>
+      <WelcomeTerm />
       <Box
         sx={{
           flex: "1 1 auto",
@@ -51,7 +70,7 @@ const Page = () => {
           sx={{
             maxWidth: 550,
             px: 3,
-            py: "100px",
+            py: "50px",
             width: "100%",
           }}
         >
@@ -66,6 +85,11 @@ const Page = () => {
               </Typography>
             </Stack>
             <form noValidate onSubmit={formik.handleSubmit}>
+              {formik.errors.submit && (
+                <Typography color="error" sx={{ mt: 3 }} variant="body2">
+                  {formik.errors.submit}
+                </Typography>
+              )}
               <Stack spacing={3}>
                 <TextField
                   error={!!(formik.touched.name && formik.errors.name)}
@@ -89,6 +113,17 @@ const Page = () => {
                   value={formik.values.email}
                 />
                 <TextField
+                  error={!!(formik.touched.phone && formik.errors.phone)}
+                  fullWidth
+                  helperText={formik.touched.phone && formik.errors.phone}
+                  label="Phone"
+                  name="phone"
+                  onBlur={formik.handleBlur}
+                  onChange={formik.handleChange}
+                  type="phone"
+                  value={formik.values.phone}
+                />
+                <TextField
                   error={!!(formik.touched.password && formik.errors.password)}
                   fullWidth
                   helperText={formik.touched.password && formik.errors.password}
@@ -100,13 +135,19 @@ const Page = () => {
                   value={formik.values.password}
                 />
               </Stack>
-              {formik.errors.submit && (
-                <Typography color="error" sx={{ mt: 3 }} variant="body2">
-                  {formik.errors.submit}
-                </Typography>
-              )}
+
               <Button fullWidth size="large" sx={{ mt: 3 }} type="submit" variant="contained">
-                Continue
+                {saving ? (
+                  <>
+                    {" "}
+                    <div className="mr-2 border-t-transparent border-solid animate-spin rounded-full border-white border-8 h-5 w-5" />
+                    <span>
+                      <Spin /> registering...
+                    </span>
+                  </>
+                ) : (
+                  <span className="text-lg font-bold"> Continue</span>
+                )}
               </Button>
             </form>
           </div>

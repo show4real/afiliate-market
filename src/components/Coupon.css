@@ -1,0 +1,78 @@
+/* Add your custom styles here */
+.affiliate-card {
+    /* Your overall card styles */
+    width: 400px;
+    margin: 20px;
+
+}
+
+.coupon-container {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.info-icon {
+    margin-right: 5px;
+}
+
+input {
+    flex: 1;
+    margin-right: 10px;
+    height: 50px;
+}
+
+button {
+    background-color: #3498db;
+    color: #fff;
+}
+
+
+/* Add your custom styles here */
+.affiliate-card2 {
+    width: 80%;
+    margin: 10px 10px 0px 10px;
+    padding: 20px 20px 0px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.title {
+    margin-right: 10px;
+}
+
+.logo {
+    width: 40px;
+    height: 40px;
+}
+
+.divider {
+    margin: 15px 0;
+}
+
+.subtitle {
+    margin-bottom: 10px;
+}
+
+.footer {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.info-icon {
+    margin-right: 5px;
+}
+
+.check-icon {
+
+    color: #52c41a;
+    /* Ant Design's success color */
+}

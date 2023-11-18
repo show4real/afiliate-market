@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useReducer, useRef, useState } from "react";
-import { login } from "src/services/authService";
+import { login, register } from "src/services/authService";
 import PropTypes from "prop-types";
 
 const HANDLERS = {
@@ -151,8 +151,26 @@ export const AuthProvider = (props) => {
     });
   };
 
-  const signUp = async (email, name, password) => {
-    throw new Error("Sign up is not implemented");
+  const signUp = async (name, email, phone, referrer, password) => {
+    let success = false;
+    let loggedUser = "";
+    try {
+      const response = await register({ name, email, phone, referrer, password });
+      console.log(response);
+      loggedUser = response.user;
+      success = true;
+    } catch (error) {
+      if (error && error.errors.email) {
+        error.errors.email.map((error) => {
+          throw new Error(error);
+        });
+      }
+      if (error && error.errors.phone) {
+        error.errors.phone.map((error) => {
+          throw new Error(error);
+        });
+      }
+    }
   };
 
   const signOut = () => {

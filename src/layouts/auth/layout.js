@@ -65,7 +65,7 @@ export const Layout = (props) => {
             },
           }}
         >
-          <Box sx={{ p: 3 }}>
+          <Box sx={{ display: { xs: "none", sm: "none", md: "block", p: 3 } }}>
             <Typography
               align="center"
               color="inherit"

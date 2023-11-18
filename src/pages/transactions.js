@@ -25,6 +25,7 @@ import ReactDatetime from "react-datetime";
 
 import { Scrollbar } from "src/components/scrollbar";
 import { getInitials } from "src/utils/get-initials";
+import SpinDiv from "src/components/SpinDiv";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "react-datetime/css/react-datetime.css";
 
@@ -95,6 +96,7 @@ const Page = () => {
           py: 8,
         }}
       >
+        {loading && <SpinDiv />}
         <Container maxWidth="xl">
           <Stack spacing={3}>
             <Stack direction="row" justifyContent="space-between" spacing={4}>
