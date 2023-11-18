@@ -57,7 +57,17 @@ const Page = () => {
       <Head>
         <title>Register | Hayzee Computer Resources</title>
       </Head>
-      <WelcomeTerm />
+      <Box
+        sx={{
+          flex: "1 1 auto",
+          alignItems: "center",
+          display: "flex",
+          justifyContent: "center",
+        }}
+      >
+        <WelcomeTerm />
+      </Box>
+
       <Box
         sx={{
           flex: "1 1 auto",

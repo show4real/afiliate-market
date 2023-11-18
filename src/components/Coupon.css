@@ -31,10 +31,9 @@ button {
 /* Add your custom styles here */
 .affiliate-card2 {
     width: 80%;
-    margin: 10px 10px 0px 10px;
-    padding: 20px 20px 0px 20px;
+    margin:20px;
+    padding: 20px;
     display: flex;
-    flex-direction: column;
     align-items: center;
 }
 
