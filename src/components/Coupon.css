@@ -75,3 +75,27 @@ button {
     color: #52c41a;
     /* Ant Design's success color */
 }
+
+
+.notification-card {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 100%;
+    padding: 20px;
+    text-align: center;
+}
+
+.notification-card h2 {
+    color: #333;
+}
+
+.notification-card p {
+    color: #666;
+    line-height: 1.5;
+}
+
+.referrer-code {
+    font-weight: bold;
+    color: #007bff;
+}

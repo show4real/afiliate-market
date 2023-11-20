@@ -58,10 +58,28 @@ const Page = () => {
         component="main"
         sx={{
           flexGrow: 1,
-          py: 8,
+          py: 4,
         }}
       >
         <Container maxWidth="xl">
+          <div class="notification-card" style={{ marginBottom: 50 }}>
+            <h2>Welcome onboard!</h2>
+            <p style={{ color: "darkblue" }}>
+              You are encouraged to share your referrer/Coupon code with family and friends for them
+              to get a discount and also earn 5% on each order they make. All they need to do is
+              tender your referrer code at the point of purchase.
+            </p>
+            <p>
+              {referrer && referrer.status == 1 && (
+                <>
+                  Code:{" "}
+                  <span class="referrer-code" style={{ textTransform: "uppercase" }}>
+                    {referrer.referral_code}
+                  </span>
+                </>
+              )}
+            </p>
+          </div>
           <Grid container spacing={3}>
             <Grid xs={12} sm={6} lg={3}>
               <OverviewTotalCustomers
