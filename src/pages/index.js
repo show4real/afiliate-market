@@ -66,7 +66,7 @@ const Page = () => {
             <h2>Welcome onboard!</h2>
             <p style={{ color: "darkblue" }}>
               You are encouraged to share your referrer/Coupon code with family and friends for them
-              to get a discount and also earn 5% on each order they make. All they need to do is
+              to get a discount and also earn 3% on each order they make. All they need to do is
               tender your referrer code at the point of purchase.
             </p>
             <p>

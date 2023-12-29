@@ -31,11 +31,11 @@ const WelcomeTerm = () => {
         </Typography>
         <Typography>
           <strong>Commission Amount:</strong> &nbsp; &nbsp;
-          <CheckCircleFilled className="check-icon" /> 5%
+          <CheckCircleFilled className="check-icon" /> 3%
         </Typography>
         <Typography>
           <strong>Additional Terms:</strong> &nbsp; &nbsp;
-          <CheckCircleFilled className="check-icon" /> You will get as high as 5% commission on
+          <CheckCircleFilled className="check-icon" /> You will get as high as 3% commission on
           total referral sales when a customer makes a purchase through uses your coupon code.
         </Typography>
       </div>
